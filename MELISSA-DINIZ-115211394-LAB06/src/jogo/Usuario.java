@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author melissadg
  *
  */
-public abstract class Usuario {
+public class Usuario {
 	private String nomeUsuario, login;
 	private double dinheiro;
 	private ArrayList<Jogo> listaJogos;
@@ -34,16 +34,15 @@ public abstract class Usuario {
 		this.listaJogos = new ArrayList<>();
 	}
 
-	/**
-	 * Metodo abstrato, implementar 
-	 * @param jogoRecebido
-	 * @return
-	 */
-	public abstract boolean comprarJogos(Jogo jogoRecebido);
+	public boolean compraJogos(Jogo jogoRecebido){
+		if (!existeJogo(jogoRecebido)) {
+			listaJogos.add(jogoRecebido);
+			return true;
+		}return false;
+	}
 
 	/**
 	 * verifica se o jogo ja existe na lista de jogos
-	 * 
 	 * @param jogoRecebido
 	 * @return true se o jogo estiver na lista de jogos
 	 * @throws Exception 
@@ -60,21 +59,22 @@ public abstract class Usuario {
 	}
 	
 	/**
-	 * Verifica valor recebido
-	 * Altera o valor de dinheiro
+	 * 
 	 * @param valor
+	 * @return
 	 * @throws Exception
 	 */
-	public void adicionaDinheiro(double valor) throws Exception{
+	public boolean adicionaDinheiro(double valor) throws Exception{
+		
 		if (valor < 0) {
 			throw new Exception("Valor precisa ser maior que zero.");
 		}else{
-			setDinheiro(valor);
+			
+			this.setDinheiro(this.getDinheiro() + valor);
+			return true;
 		}
 	}
 	
-	
-
 	/**
 	 * Metodo que testa a validade do nome do usuario
 	 * 
@@ -87,6 +87,19 @@ public abstract class Usuario {
 		}
 	}
 
+	/**
+	 * Metodo que testa a validade do jogo
+	 * 
+	 * @param nome
+	 * @throws Exception
+	 */
+	private void testaJogo(Jogo jogo) throws Exception {
+		if (jogo == null) {
+			throw new Exception("Jogo nao pode ser nulo.");
+		}
+	}
+	
+	
 	/**
 	 * Metodos que testa a validade do login do usuario
 	 * 
@@ -111,6 +124,7 @@ public abstract class Usuario {
 		}
 	}
 
+	
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}

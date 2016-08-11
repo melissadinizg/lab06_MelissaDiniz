@@ -33,7 +33,9 @@ public class Jogo {
 	}
 	
 	/**
-	 * 
+	 * Metodo que registra a jogada
+	 * aumenta o score e atualiza 
+	 * a quantidade de vezes que zerou
 	 * @param score
 	 * @param zerou
 	 */
@@ -45,7 +47,8 @@ public class Jogo {
 			vezesZeradas ++;
 		}
 	}
-	
+
+
 	/**
 	 * Metodo que testa a validade do nome do jogo
 	 * 
@@ -71,14 +74,114 @@ public class Jogo {
 	}
 	
 	/**
-	 * Metodo que testa a validade do jogo
-	 * 
-	 * @param nome
-	 * @throws Exception
+	 * Pega nome
+	 * @return
 	 */
-	private void testaJogo(Jogo jogo) throws Exception {
-		if (jogo == null) {
-			throw new Exception("Jogo nao pode ser nulo.");
-		}
+	public String getNome() {
+		return nome;
+	}
+	
+	/**
+	 * Altera nome
+	 * @param nome
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * Pega preco
+	 * @return
+	 */
+	public double getPreco() {
+		return preco;
+	}
+
+	/**
+	 * Altera preco
+	 * @param preco
+	 */
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	/**
+	 * Pega o valor do maior score
+	 * @return
+	 */
+	public int getMaiorScore() {
+		return maiorScore;
+	}
+
+	/**
+	 * Altera o maior score
+	 * @param maiorScore
+	 */
+	public void setMaiorScore(int maiorScore) {
+		this.maiorScore = maiorScore;
+	}
+
+	/**
+	 * Pega a quantidade de vezes jogadas
+	 * @return
+	 */
+	public int getVezesJogadas() {
+		return vezesJogadas;
+	}
+
+	/**
+	 * Altera a quantidade de vezes jogadas
+	 * @param vezesJogadas
+	 */
+	public void setVezesJogadas(int vezesJogadas) {
+		this.vezesJogadas = vezesJogadas;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public int getVezesZeradas() {
+		return vezesZeradas;
+	}
+
+	/**
+	 * 
+	 * @param vezesZeradas
+	 */
+	public void setVezesZeradas(int vezesZeradas) {
+		this.vezesZeradas = vezesZeradas;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isZerou() {
+		return zerou;
+	}
+
+	/**
+	 * 
+	 * @param zerou
+	 */
+	public void setZerou(boolean zerou) {
+		this.zerou = zerou;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Jogabilidade getTipo() {
+		return tipo;
+	}
+
+	/**
+	 * 
+	 * @param tipo
+	 */
+	public void setTipo(Jogabilidade tipo) {
+		this.tipo = tipo;
 	}
 }

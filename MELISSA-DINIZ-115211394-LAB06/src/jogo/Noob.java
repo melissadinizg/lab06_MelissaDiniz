@@ -13,10 +13,6 @@ public class Noob extends Usuario{
 		super(nomeUsuario, login, dinheiro);
 	}
 
-	@Override
-	public boolean comprarJogos(Jogo jogoRecebido) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
