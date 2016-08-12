@@ -13,7 +13,8 @@ public class Usuario {
 	private String nomeUsuario, login;
 	private double dinheiro;
 	private ArrayList<Jogo> listaJogos;
-
+	private Noob noob;
+	private Veterano veterano;
 
 	/**
 	 * Construtor do Usuario
@@ -34,13 +35,32 @@ public class Usuario {
 		this.listaJogos = new ArrayList<>();
 	}
 
+	/**
+	 * Metodo abstrato para realizar a compra dos jogos
+	 * 
+	 * @param jogoRecebido
+	 * @return
+	 */
 	public boolean compraJogos(Jogo jogoRecebido){
 		if (!existeJogo(jogoRecebido)) {
-			listaJogos.add(jogoRecebido);
-			return true;
-		}return false;
+			if (getClass().equals(Noob.class)) {
+				if (noob.calculaDesconto(jogoRecebido) <= getDinheiro()) {
+					listaJogos.add(jogoRecebido);
+					this.setDinheiro(dinheiro - noob.calculaDesconto(jogoRecebido));
+					return true;
+				}
+				
+			//colocar um else
+			}if (getClass().equals(Veterano.class)) {
+				if (veterano.calculaDesconto(jogoRecebido) <= getDinheiro() ) {
+					listaJogos.add(jogoRecebido);
+					this.setDinheiro( dinheiro - veterano.calculaDesconto(jogoRecebido));
+					return true;
+				}
+			}
+		}
+		return false;
 	}
-
 	/**
 	 * verifica se o jogo ja existe na lista de jogos
 	 * @param jogoRecebido
