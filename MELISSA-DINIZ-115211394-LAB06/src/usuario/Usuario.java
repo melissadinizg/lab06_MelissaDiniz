@@ -4,9 +4,6 @@
 package usuario;
 
 import java.util.ArrayList;
-
-import org.hamcrest.core.IsInstanceOf;
-
 import jogo.Jogo;
 
 /**
@@ -45,24 +42,11 @@ public class Usuario {
 	 * @param jogoRecebido
 	 * @return
 	 */
-	public boolean compraJogos(Jogo jogoRecebido){
+	public boolean compraJogos(Jogo jogoRecebido) {
 		if (!existeJogo(jogoRecebido)) {
-			if (getClass().equals(Noob.class)) {
-				if (noob.calculaDesconto(jogoRecebido) <= getDinheiro()) {
-					listaJogos.add(jogoRecebido);
-					this.setDinheiro(dinheiro - noob.calculaDesconto(jogoRecebido));
-					return true;
-				}
-				
-			//colocar um else
-			}if (getClass().equals(Veterano.class)) {
-				if (veterano.calculaDesconto(jogoRecebido) <= getDinheiro() ) {
-					listaJogos.add(jogoRecebido);
-					this.setDinheiro( dinheiro - veterano.calculaDesconto(jogoRecebido));
-					return true;
-				}
-			}
+			return listaJogos.add(jogoRecebido);
 		}
+		//ou exception de jogo ja comprado
 		return false;
 	}
 
