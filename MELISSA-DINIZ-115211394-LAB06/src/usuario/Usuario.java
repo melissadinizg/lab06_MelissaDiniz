@@ -5,20 +5,17 @@ package usuario;
 
 import java.util.ArrayList;
 
-import org.hamcrest.core.IsInstanceOf;
-
 import jogo.Jogo;
 
 /**
  * @author melissadg
  *
  */
-public class Usuario {
+public abstract class Usuario {
 	private String nomeUsuario, login;
 	private double dinheiro;
 	private ArrayList<Jogo> listaJogos;
-	private Noob noob;
-	private Veterano veterano;
+	private int x2p;
 
 	/**
 	 * Construtor do Usuario
@@ -32,77 +29,81 @@ public class Usuario {
 		testaNomeUsuario(nomeUsuario);
 		testaLogin(login);
 		testaDinheiro(dinheiro);
-
+		
 		this.nomeUsuario = nomeUsuario;
 		this.login = login;
 		this.dinheiro = dinheiro;
-		this.listaJogos = new ArrayList<Jogo>();
+		this.listaJogos = new ArrayList<>();
 	}
 
+
 	/**
-	 * Metodo abstrato para realizar a compra dos jogos
+	 * Metodo que realiza a compra dos jogos
 	 * 
 	 * @param jogoRecebido
 	 * @return
 	 */
-	public boolean compraJogos(Jogo jogoRecebido){
+	public boolean compraJogos(Jogo jogoRecebido) {
 		if (!existeJogo(jogoRecebido)) {
-			if (getClass().equals(Noob.class)) {
-				if (noob.calculaDesconto(jogoRecebido) <= getDinheiro()) {
-					listaJogos.add(jogoRecebido);
-					this.setDinheiro(dinheiro - noob.calculaDesconto(jogoRecebido));
-					return true;
-				}
-				
-			//colocar um else
-			}if (getClass().equals(Veterano.class)) {
-				if (veterano.calculaDesconto(jogoRecebido) <= getDinheiro() ) {
-					listaJogos.add(jogoRecebido);
-					this.setDinheiro( dinheiro - veterano.calculaDesconto(jogoRecebido));
-					return true;
-				}
-			}
+			return listaJogos.add(jogoRecebido);
 		}
+		//ou exception de jogo ja comprado
 		return false;
 	}
-
+	
+	/**
+	 * Metodo que atualiza o valor do x2p do usuario
+	 * @param jogoRecebido
+	 * @return x2p
+	 */
+	public int calculaX2p(Jogo jogoRecebido){
+		int somaValor = this.getX2p() + (int)jogoRecebido.getPreco() * bonusX2p();
+		this.setX2p(somaValor);
+		return this.getX2p();
+	}
+	
 	/**
 	 * verifica se o jogo ja existe na lista de jogos
-	 * 
 	 * @param jogoRecebido
 	 * @return true se o jogo estiver na lista de jogos
-	 * @throws Exception
+	 * @throws Exception 
 	 */
 	public boolean existeJogo(Jogo jogoRecebido) {
-
 		for (Jogo jogo : listaJogos) {
-			if (jogo != null) {
-				if (jogo.equals(jogoRecebido)) {
-					return true;
-				}
-
+			if (jogo.equals(jogoRecebido)) {
+				return true;
 			}
 		}
 		return false;
 	}
-
+	
+	public void registraJogada(String nomeDoJogo, int score, boolean zerou){
+		
+	}
+	
+	/**
+	 * Metodo abstrado qusado para pegar o valor do bonus do usuario
+	 * @return
+	 */
+	abstract int bonusX2p();
+	
 	/**
 	 * 
 	 * @param valor
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean adicionaDinheiro(double valor) throws Exception {
-
+	public boolean adicionaDinheiro(double valor) throws Exception{
+		
 		if (valor < 0) {
 			throw new Exception("Valor precisa ser maior que zero.");
-		} else {
-
+		}else{
+			
 			this.setDinheiro(this.getDinheiro() + valor);
 			return true;
 		}
 	}
-
+	
 	/**
 	 * Metodo que testa a validade do nome do usuario
 	 * 
@@ -126,7 +127,8 @@ public class Usuario {
 			throw new Exception("Jogo nao pode ser nulo.");
 		}
 	}
-
+	
+	
 	/**
 	 * Metodos que testa a validade do login do usuario
 	 * 
@@ -138,7 +140,7 @@ public class Usuario {
 			throw new Exception("Login do usuario nao pode ser vazio ou nulo.");
 		}
 	}
-
+	
 	/**
 	 * Metodos que testa a validade do login do usuario
 	 * 
@@ -151,6 +153,7 @@ public class Usuario {
 		}
 	}
 
+	
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
@@ -182,28 +185,42 @@ public class Usuario {
 	public void setListaJogos(ArrayList<Jogo> listaJogos) {
 		this.listaJogos = listaJogos;
 	}
-
-	/*
-	 * double precoDeCompra;
-	 * 
-	 * if (getDinheiro() >= jogoRecebido.getPreco()) { if
-	 * (getClass().equals(Noob.class)) { precoDeCompra = jogoRecebido.getPreco()
-	 * - noob.calculaDesconto(jogoRecebido);
-	 * this.setDinheiro(this.getDinheiro()-precoDeCompra);
-	 * listaJogos.add(jogoRecebido); return true;
-	 * 
-	 * }else{
-	 * 
-	 * precoDeCompra = jogoRecebido.getPreco() -
-	 * veterano.calculaDesconto(jogoRecebido);
-	 * this.setDinheiro(this.getDinheiro()-precoDeCompra);
-	 * listaJogos.add(jogoRecebido); return true; }
-	 * 
-	 * 
-	 * }else{ return false; }
-	 * 
-	 * 
-	 * }
+	
+	/**
+	 * @return the x2p
 	 */
+	public int getX2p() {
+		return x2p;
+	}
 
+
+	/**
+	 * @param x2p the x2p to set
+	 */
+	public void setX2p(int x2p) {
+		this.x2p = x2p;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

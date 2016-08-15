@@ -32,11 +32,36 @@ public class TesteUsuario {
 	}
 	
 	@Test
+	public void testX2p() throws Exception{
+		
+		Jogo jogo1 = new RPG("Jogo1", 1.0); 
+		Jogo jogo2 = new RPG("Jogo2", 1.0);
+		
+		maria.compraJogos(jogo1); //10
+		joao.compraJogos(jogo1); //15
+		
+		
+		assertEquals(10, maria.calculaX2p(jogo1));
+		assertEquals(1015, joao.calculaX2p(jogo1));
+		
+		maria.compraJogos(jogo2);
+		joao.compraJogos(jogo2);
+		
+		assertEquals(20, maria.calculaX2p(jogo2));
+		assertEquals(1030, joao.calculaX2p(jogo2));
+
+	}
+	
+	@Test
 	public void testCompraJogo() throws Exception{
-		Jogo jogo1 = new RPG("Jogo1", 15.0);
+		Jogo jogo1 = new RPG("Jogo1", 1.0);
 		Jogo jogo2 = new Luta("Jogo2", 35.0);
 		
 		assertTrue(maria.compraJogos(jogo2));
+		assertFalse(maria.compraJogos(jogo2));
+		
+		assertTrue(maria.existeJogo(jogo2));
+		assertFalse(kleber.existeJogo(jogo1));
 	}
 	
 	@Test
