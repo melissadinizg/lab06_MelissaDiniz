@@ -21,6 +21,9 @@ public class Plataforma extends Jogo {
 
 	public void registraJogada(int score, boolean zerou) {
 		
+		
+		
+		
 	}
 
 }
