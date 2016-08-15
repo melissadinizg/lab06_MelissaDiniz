@@ -2,7 +2,6 @@
  * 
  */
 package usuario;
-
 import jogo.Jogo;
 
 /**
@@ -11,21 +10,34 @@ import jogo.Jogo;
  */
 public class Veterano extends Usuario{
 	private double DESCONTO_VETERANO = 0.3;
-	private int x2p;
-	private Usuario usuario;
+	
 	
 	public Veterano(String nomeUsuario, String login, double dinheiro) throws Exception {
 		super(nomeUsuario, login, dinheiro);
-		this.x2p = 1000;
-	}
-	
-	public double calculaDesconto(Jogo jogoRecebido) {
-		double precoComDesconto = jogoRecebido.getPreco() - (jogoRecebido.getPreco() * DESCONTO_VETERANO);
+		super.setX2p(1000);
 		
-		return precoComDesconto;
 	}
-
 	
+	//aki o metodo calcula internamente na classe o proprio desconto e apenas chama o metodo em usuario pra guardar o jogo
+		public boolean compraJogos(Jogo jogoRecebido) {
+			double precoComDesconto = jogoRecebido.getPreco() - (jogoRecebido.getPreco() * DESCONTO_VETERANO);
+			
+			if (precoComDesconto <= super.getDinheiro()) {
+				super.setDinheiro(super.getDinheiro() - precoComDesconto);
+				return super.compraJogos(jogoRecebido);
+			}
+			return false;
+		}
+
+		/**
+		 * Sobreescrita do metodo calculaX2p de usuario
+		 * aplicando o desconto no valor do preco
+		 */
+	@Override
+	public int bonusX2p(){
+		return 15;
 	}
+	
 
 
+	}
