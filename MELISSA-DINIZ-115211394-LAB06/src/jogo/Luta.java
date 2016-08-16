@@ -18,8 +18,16 @@ public class Luta extends Jogo{
 	public Luta(String nome, double preco) throws Exception {
 		super(nome, preco);
 	}
-	
-	public void registraJogada(int score, boolean zerou){
-		
+
+	/**
+	 * Sobreescrita do metodo de jogo
+	 * aplica o calculo do bonus
+	 */
+	@Override
+	int bonusX2p() {
+		int bonus = super.getMaiorScore() / 1000;
+		return bonus;
 	}
+	
+	
 }

@@ -3,16 +3,19 @@
  */
 package jogo;
 
+import usuario.Usuario;
+
 /**
  * @author melissadg
  *
  */
-public class Jogo {
+public abstract class Jogo {
 
 	private String nome;
 	private double preco;
 	private int maiorScore, vezesJogadas, vezesZeradas;
 	private boolean zerou;
+	private Usuario usuario;
 	private Jogabilidade tipo;
 	
 	/**
@@ -39,15 +42,25 @@ public class Jogo {
 	 * @param score
 	 * @param zerou
 	 */
-	public void registraJogada(int score, boolean zerou){
+	public int registraJogada(int score, boolean zerou){
 		if(maiorScore < score){
 			maiorScore = score;
-		}if(zerou == true){
 			
+		}if(zerou == true){
 			vezesZeradas ++;
 		}
+		
+		int x2pAtual = usuario.getX2p();
+		usuario.setX2p(x2pAtual + bonusX2p());
+		return usuario.getX2p();
 	}
 
+	/**
+	 * metodo abstrato que sera utilizado para aplicar
+	 * o bonus 
+	 * @return
+	 */
+	abstract int bonusX2p();
 
 	/**
 	 * Metodo que testa a validade do nome do jogo
