@@ -19,8 +19,13 @@ public class Plataforma extends Jogo {
 		super(nome, preco);
 	}
 
-	public void registraJogada(int score, boolean zerou) {
-		
+	/**
+	 * Sobreescrita do metodo de jogo
+	 * aplica o calculo do bonus
+	 */
+	@Override
+	int bonusX2p() {
+		return super.getVezesZeradas() * 20;
 	}
 
 }

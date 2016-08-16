@@ -16,6 +16,7 @@ public abstract class Usuario {
 	private double dinheiro;
 	private ArrayList<Jogo> listaJogos;
 	private int x2p;
+	private Jogo jogo;
 
 	/**
 	 * Construtor do Usuario
@@ -77,8 +78,8 @@ public abstract class Usuario {
 		return false;
 	}
 	
-	public void registraJogada(String nomeDoJogo, int score, boolean zerou){
-		
+	void registraJogada(String nomeDoJogo, int score, boolean zerou){
+		jogo.registraJogada(score, zerou);
 	}
 	
 	/**

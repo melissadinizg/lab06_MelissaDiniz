@@ -20,33 +20,32 @@ import usuario.Veterano;
  *
  */
 public class TesteUsuario {
-	private Usuario maria;
-	private Usuario joao;
-	private Usuario kleber;
+	private Usuario maria, joao, kleber;
+	private Jogo jogo1, jogo2;
 
 	@Before
 	public void criaUsuario() throws Exception {
 		maria = new Noob("Maria", "maria123", 500.0);
 		joao = new Veterano("Joao", "j123", 10.0);
 		kleber = new Noob("Kleber", "klebinho", 150);
+		jogo1 = new RPG("Jogo1", 1.0); 
+		jogo2 = new RPG("Jogo2", 1.0);
 	}
 	
 	@Test
 	public void testX2p() throws Exception{
-		
-		Jogo jogo1 = new RPG("Jogo1", 1.0); 
-		Jogo jogo2 = new RPG("Jogo2", 1.0);
-		
+	
 		maria.compraJogos(jogo1); //10
 		joao.compraJogos(jogo1); //15
-		
 		
 		assertEquals(10, maria.calculaX2p(jogo1));
 		assertEquals(1015, joao.calculaX2p(jogo1));
 		
 		maria.compraJogos(jogo2);
 		joao.compraJogos(jogo2);
+		kleber.compraJogos(jogo1);
 		
+		assertEquals(10, kleber.calculaX2p(jogo1));
 		assertEquals(20, maria.calculaX2p(jogo2));
 		assertEquals(1030, joao.calculaX2p(jogo2));
 
