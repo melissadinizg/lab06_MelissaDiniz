@@ -4,7 +4,10 @@
 package usuario;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dbf142eeb6d1e1640905545ba534c7fe676de32f
 import jogo.Jogo;
 import testException.TestUsuario;
 
