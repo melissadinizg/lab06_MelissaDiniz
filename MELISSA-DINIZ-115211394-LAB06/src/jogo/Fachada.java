@@ -4,15 +4,16 @@
 package jogo;
 
 import java.util.ArrayList;
-
+import jogo.Jogo;
 import usuario.Usuario;
-
 /**
- * @author Melissa
+ * @author Melissa Diniz - 115211394
  *
  */
 public class Fachada {
-private ArrayList<Usuario> loja;
+	private ArrayList<Usuario> loja;
+	private Usuario user;
+	private Jogo j;
 	
 	public Fachada(){
 		loja = new ArrayList<>();
@@ -39,6 +40,11 @@ private ArrayList<Usuario> loja;
 		}
 	}
 	
+	public void vendeJogo(Jogo jogo){
+		user.compraJogos(jogo);
+	}
+	
+
 	private boolean buscaUser(Usuario user){
 		if (loja.contains(user)) {
 			return true;
@@ -74,5 +80,35 @@ private ArrayList<Usuario> loja;
 				throw new Exception("Nao existe usuario com esse login.");
 			}
 		}return false;
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder retorno = new StringBuilder("=== Central P2-CG ===\n");
+		double precoTotal = 0.0;
+		
+		for (Usuario usuario : loja) {
+			
+			retorno.append(usuario.getLogin()+"\n");
+			retorno.append(usuario.getNomeUsuario() + "- Jogador " + usuario.getClass().getName()+"\n");
+			retorno.append("Lista de Jogos: \n");
+			for (Jogo jogo : usuario.getListaJogos()) {
+				precoTotal = precoTotal + jogo.getPreco();
+				retorno.append("+ " + jogo.getNome() + " - " + jogo.getClass().getName()+"\n");
+				
+			}
+			retorno.append("==> Jogou " + j.getVezesJogadas() + " vez(es)\n");
+			retorno.append("==> Zerou " + j.getVezesZeradas() + " vez(es)\n");
+			retorno.append("==> Mario score: " + j.getMaiorScore() + "\n");
+			retorno.append("Total de preço dos jogos: R$ " + precoTotal+"\n");
+			retorno.append("\n--------------------------------------------");
+
+
+		}
+		return retorno.toString();
 	}
 }

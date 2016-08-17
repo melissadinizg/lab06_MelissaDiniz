@@ -3,6 +3,7 @@
  */
 package jogo;
 
+import testException.TestJogo;
 import usuario.Usuario;
 
 /**
@@ -25,8 +26,8 @@ public abstract class Jogo {
 	 * @throws Exception 
 	 */
 	public Jogo(String nome, double preco) throws Exception{
-		testaNomeJogo(nome);
-		testaPrecoJogo(preco);
+		TestJogo.testaNomeJogo(nome);
+		TestJogo.testaPrecoJogo(preco);
 		
 		this.nome = nome;
 		this.preco = preco;
@@ -62,29 +63,6 @@ public abstract class Jogo {
 	 */
 	abstract int bonusX2p();
 
-	/**
-	 * Metodo que testa a validade do nome do jogo
-	 * 
-	 * @param nome
-	 * @throws Exception
-	 */
-	private void testaNomeJogo(String nome) throws Exception {
-		if (nome == null || nome.trim().equals("")) {
-			throw new Exception("Nome do jogo nao pode ser vazio ou nulo.");
-		}
-	}
-	
-	/**
-	 * Metodo que testa a validade do preco do jogo
-	 * 
-	 * @param nome
-	 * @throws Exception
-	 */
-	private void testaPrecoJogo(double preco) throws Exception {
-		if (preco <= 0.0) {
-			throw new Exception("Preco do jogo nao deve ser menor que zero.");
-		}
-	}
 	
 	/**
 	 * Pega nome

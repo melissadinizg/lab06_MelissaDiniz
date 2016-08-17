@@ -6,6 +6,7 @@ package usuario;
 import java.util.ArrayList;
 
 import jogo.Jogo;
+import testException.TestUsuario;
 
 /**
  * @author melissadg
@@ -27,9 +28,9 @@ public abstract class Usuario {
 	 * @throws Exception
 	 */
 	public Usuario(String nomeUsuario, String login, double dinheiro) throws Exception {
-		testaNomeUsuario(nomeUsuario);
-		testaLogin(login);
-		testaDinheiro(dinheiro);
+		TestUsuario.testaNomeUsuario(nomeUsuario);
+		TestUsuario.testaLogin(login);
+		TestUsuario.testaDinheiro(dinheiro);
 		
 		this.nomeUsuario = nomeUsuario;
 		this.login = login;
@@ -78,12 +79,18 @@ public abstract class Usuario {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param nomeDoJogo
+	 * @param score
+	 * @param zerou
+	 */
 	void registraJogada(String nomeDoJogo, int score, boolean zerou){
 		jogo.registraJogada(score, zerou);
 	}
 	
 	/**
-	 * Metodo abstrado qusado para pegar o valor do bonus do usuario
+	 * Metodo abstrato que eh usado para pegar o valor do bonus do usuario
 	 * @return
 	 */
 	abstract int bonusX2p();
@@ -105,88 +112,89 @@ public abstract class Usuario {
 		}
 	}
 	
-	/**
-	 * Metodo que testa a validade do nome do usuario
-	 * 
-	 * @param nome
-	 * @throws Exception
-	 */
-	private void testaNomeUsuario(String nome) throws Exception {
-		if (nome == null || nome.trim().equals("")) {
-			throw new Exception("Nome do usuario nao pode ser vazio ou nulo.");
-		}
-	}
-
-	/**
-	 * Metodo que testa a validade do jogo
-	 * 
-	 * @param nome
-	 * @throws Exception
-	 */
-	private void testaJogo(Jogo jogo) throws Exception {
-		if (jogo == null) {
-			throw new Exception("Jogo nao pode ser nulo.");
-		}
-	}
 	
-	
-	/**
-	 * Metodos que testa a validade do login do usuario
-	 * 
-	 * @param login
-	 * @throws Exception
-	 */
-	private void testaLogin(String login) throws Exception {
-		if (login == null || login.trim().equals("")) {
-			throw new Exception("Login do usuario nao pode ser vazio ou nulo.");
-		}
-	}
-	
-	/**
-	 * Metodos que testa a validade do login do usuario
-	 * 
-	 * @param login
-	 * @throws Exception
-	 */
-	private void testaDinheiro(double dinheiro) throws Exception {
-		if (dinheiro < 0.0) {
-			throw new Exception("Dinheiro precisa ser maior ou igual a zero.");
-		}
-	}
 
 	
+	/**
+	 * @return the nomeUsuario
+	 */
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
 
+
+	/**
+	 * @param nomeUsuario the nomeUsuario to set
+	 */
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
 
+
+	/**
+	 * @return the login
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+
+	/**
+	 * @param login the login to set
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+
+	/**
+	 * @return the dinheiro
+	 */
 	public double getDinheiro() {
 		return dinheiro;
 	}
 
+
+	/**
+	 * @param dinheiro the dinheiro to set
+	 */
 	public void setDinheiro(double dinheiro) {
 		this.dinheiro = dinheiro;
 	}
 
+
+	/**
+	 * @return the listaJogos
+	 */
 	public ArrayList<Jogo> getListaJogos() {
 		return listaJogos;
 	}
 
+
+	/**
+	 * @param listaJogos the listaJogos to set
+	 */
 	public void setListaJogos(ArrayList<Jogo> listaJogos) {
 		this.listaJogos = listaJogos;
 	}
-	
+
+
+	/**
+	 * @return the jogo
+	 */
+	public Jogo getJogo() {
+		return jogo;
+	}
+
+
+	/**
+	 * @param jogo the jogo to set
+	 */
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
+	}
+
+
 	/**
 	 * @return the x2p
 	 */
@@ -194,34 +202,19 @@ public abstract class Usuario {
 		return x2p;
 	}
 
-
 	/**
 	 * @param x2p the x2p to set
 	 */
-	public void setX2p(int x2p) {
-		this.x2p = x2p;
+	public void setX2p(int x2pNovo) {
+		this.mudaX2p(x2pNovo);
 	}
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Para alterar o valor do x2p no Usuario
+	 * @param x2pNovo
+	 */
+	private void mudaX2p(int x2pNovo){
+		this.x2p = x2pNovo;
+	}
 	
 }
