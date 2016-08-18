@@ -4,10 +4,6 @@
 package usuario;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-
-=======
->>>>>>> dbf142eeb6d1e1640905545ba534c7fe676de32f
 import jogo.Jogo;
 import testException.TestUsuario;
 
@@ -42,6 +38,8 @@ public abstract class Usuario {
 	}
 
 
+	
+	
 	/**
 	 * Metodo que realiza a compra dos jogos
 	 * 
@@ -114,9 +112,6 @@ public abstract class Usuario {
 			return true;
 		}
 	}
-	
-	
-
 	
 	/**
 	 * @return the nomeUsuario
