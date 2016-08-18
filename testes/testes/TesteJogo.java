@@ -64,3 +64,4 @@ public class TesteJogo {
 	public void testCompraJogo(){
 	}
 }
+

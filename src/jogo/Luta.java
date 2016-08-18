@@ -31,3 +31,4 @@ public class Luta extends Jogo{
 	
 	
 }
+

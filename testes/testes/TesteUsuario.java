@@ -94,4 +94,3 @@ public class TesteUsuario {
 			assertEquals("Dinheiro precisa ser maior ou igual a zero.", e.getMessage());
 		}
 	}
-}
